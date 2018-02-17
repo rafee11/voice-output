@@ -62,13 +62,21 @@ function onDeviceReady() {
 			var res2 = event.results[0][0].transcript.match('danger');
 			var res3 = event.results[0][0].transcript.match('save');
 			if(res1 || res2 || res3){
-				window.plugins.CallNumber.callNumber(onSuccess, onError, "+919944475589", bypassAppChooser);                
+				window.plugins.CallNumber.callNumber(onSuccess, onError, "+919944475589", true);                
 			}
             
         }
     }
 		
 	setInterval(function(){ recognition.start();  }, 10000);
+	
+	function onSuccess(result){
+	  console.log("Success:"+result);
+	}
+
+	function onError(result) {
+	  console.log("Error:"+result);
+	}
 	
 	
 }
