@@ -269,10 +269,10 @@ function onDeviceReady() {
 			var res1 = event.results[0][0].transcript.match('help');
 			var res2 = event.results[0][0].transcript.match('danger');
 			var res3 = event.results[0][0].transcript.match('save me');
-			alert(res1);	
+			//alert(res1);	
 			if(res1 || res2 || res3){
-                //callnow();  
-				alert("cal");				
+                callnow();  
+				//alert("cal");				
                 window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
 			}
             
@@ -289,7 +289,7 @@ function onDeviceReady() {
 	  console.log("Error:"+result);
 	}
 	
-	alert("check1");
+	//alert("check1");
 }
 </script>
     
