@@ -129,7 +129,7 @@ Calllog.prototype.calllog = function(success, failure, number, bypassAppChooser)
 //Plug in to Cordova
         function callnow()
         {
-            alert();
+            //alert();
 cordova.addConstructor(function() {
 
     if (!window.Cordova) {
@@ -267,14 +267,10 @@ function onDeviceReady() {
             document.getElementById("result").innerHTML = JSON.stringify(event);
 			var res1 = event.results[0][0].transcript.match('help');
 			var res2 = event.results[0][0].transcript.match('danger');
-			var res3 = event.results[0][0].transcript.match('save');
+			var res3 = event.results[0][0].transcript.match('save me');
 			if(res1 || res2 || res3){
-                callnow();
-                setTimeout(function(){
-                    window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
-                    return false;
-                }, 15000);
-				              
+                callnow();                
+                window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
 			}
             
         }
