@@ -53,7 +53,7 @@ function onDeviceReady() {
             alert(event);            
             q.value = event.results[0][0].transcript;
             //q.form.submit();
-            document.getElementById("result").innerHTML = event.toString();
+            document.getElementById("result").innerHTML = JSON.stringify(event);
             return false;
         }
     }
