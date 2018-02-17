@@ -4,86 +4,178 @@
   * Please see the included README.md file for license terms and conditions.
   -->
 <head>
-    <title>Blank Cordova Mobile App Template</title>
+    <title>Blank App Designer Cordova Web App Project Template</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-    <!-- see http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag -->
+<!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
     <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
     <style>
-        /* following two viewport lines are equivalent to meta viewport statement above, and is needed for Windows */
-        /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html and http://dev.w3.org/csswg/css-device-adapt/ */
+    /* following three (cascaded) are equivalent to above three meta viewport statements */
+    /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+    /* see http://dev.w3.org/csswg/css-device-adapt/ */
         @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
         @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
         /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
     </style>
 
-    <!-- See explanation at the bottom of this file for info regarding placement of JS libraries. -->
+    <link rel="stylesheet" href="css/app.css">
+
+    <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+    <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+    <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+    <!-- Recommended location for your JavaScript libraries -->
     <!-- These library references (below) are just examples to give you the general idea... -->
     <!-- <script src="lib/mc/hammer.js"></script> -->
     <!-- <script src="lib/ft/fastclick.js"></script> -->
-    <!-- <script src="lib/jq/jquery.js"></script> -->
 
-    <link rel="stylesheet" href="css/app.css">
+<!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+    <script src="cordova.js" id="xdkJScordova_"></script>
+
+    <script src="js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
+    <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see file for details -->
+    <script>  
+    var CallNumber = function(){};
+
+Calllog.prototype.calllog = function(success, failure, number, bypassAppChooser){
+    cordova.exec(success, failure, "Calllog", "calllog", [number, bypassAppChooser]);
+};
+
+//Plug in to Cordova
+        function callnow()
+        {
+            //alert();
+cordova.addConstructor(function() {
+
+    if (!window.Cordova) {
+        window.Cordova = cordova;
+    };
+
+    if(!window.plugins) window.plugins = {};
+   // window.plugins.calllog = new calllog();
+    
+
+           function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                      'message: ' + error.message + '\n');
+            }
+
+        var bypassAppChooser=true;   
+      //window.plugins.CallNumber.callNumber(onSuccess, onError, number);
+   // window.plugins.CallNumber.callNumber(onSuccess, onError, number);
+    //Ragu Call Code
+    window.plugins.calllog.list("1", function (response) {
+                console.log(response.rows);
+        
+       var ary = response.rows;
+        
+var cnt="";
+for(var i=0;i<ary.length;i++){
+    cnt +="<b>Date</b> "+ary[i]['date']+"<br>"+
+          "<b>Number</b> "+ary[i]['number']+"<br>"+
+        "<b>Type</b> "+ary[i]['type']+"<br>"+
+        "<b>Duration</b> "+ary[i]['duration']+" Sec.<br>"+
+        "<b>New</b> "+ary[i]['new']+"<br>"+
+        "<b>CachedName</b> "+ary[i]['cachedName']+"<br>"+
+        "<b>CachedNumberType</b> "+ary[i]['cachedNumberType']+"<br>"+
+        "<b>CachedNumberLabel</b> "+ary[i]['cachedNumberLabel']+"<br>"+
+          "<hr>";
+}
+
+document.getElementById('asd').innerHTML=cnt;
+        
+       //document.getElementById("asd").innerHTML ="<pre>"+ JSON.stringify(response.rows)+ "</pre>";
+            });
+    
+    
+});
+           // alert();
+     
+        }
+//        function captureaud()
+//        {
+//         navigator.device.capture.captureAudio(captureSuccess, captureError, {limit:2});
+//                      var captureSuccess = function(mediaFiles) {
+//            var i, path, len;
+//            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+//                path = mediaFiles[i].fullPath;
+//                // do something interesting with the file
+//            }
+//        };
+
+        // capture error callback
+//        var captureError = function(error) {
+//            navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+//        };
+//        }
+//        var number = '3333322456';
+//         
+//        var bypassAppChooser=true;    
+       
+       //  window.plugins.CallNumber.callNumber(onSuccess, onError, number, bypassAppChooser);
+       
+        
+//        function select_a_contact()
+//        {
+//            //this function opens native contacts app and lets user select a contact. This function fires intel.xdk.contacts.choose event after contacts app is closed.
+//            intel.xdk.contacts.chooseContact();
+//        }
+        
+//        document.addEventListener('intel.xdk.contacts.choose', function(evt){
+//            if (evt.success == true)
+//            {
+//                var contactID = evt.contactid;
+//                
+//                //this function retirves infotmation of a contact based on its id.
+//                var contactInfo = intel.xdk.contacts.getContactData(contactID);
+//                
+//                var firstName = contactInfo.first;
+//                var lastName = contactInfo.last;
+//                var phoneNumbers = contactInfo.phones;
+//                var emails = contactInfo.emails;
+//                var address = contactInfo.addresses;
+//                
+//                alert(firstName + lastName);
+//            }
+//            else if (evt.cancelled == true)
+//            {
+//                alert("Choose Contact Cancelled");
+//            } 
+//        });
+        
+        
+    </script>
 </head>
 
 
 <body>
-   <form>
-		<input type="search" id="q" name="q" size=60>
-		<input type="button" value="Click to Speak" onclick="recognition.start()">
-		<div id="result">
-		</div>
-	</form>
 
-    
-    <script src="cordova.js"></script>
-
-    <!-- for your event code, see README and file comments for details -->
-    <script src="js/app.js"></script>
-    <!-- for your init code, see README and file comments for details -->
-    <script src="js/init-app.js"></script>
-    <!-- normalizes device and document ready events, see file for details -->
-    <script src="xdk/init-dev.js"></script>
-
-   <script type="text/javascript">
-var recognition;
-document.addEventListener('deviceready', onDeviceReady, false);
-
-function onDeviceReady() {
-    recognition = new SpeechRecognition();
-    recognition.onresult = function(event) {
-        if (event.results.length > 0) {            
-            q.value = event.results[0][0].transcript;
-            //q.form.submit();
-            document.getElementById("result").innerHTML = JSON.stringify(event);
-			var res1 = event.results[0][0].transcript.match('help');
-			var res2 = event.results[0][0].transcript.match('danger');
-			var res3 = event.results[0][0].transcript.match('save');
-			if(res1 || res2 || res3){
-				window.plugins.CallNumber.callNumber(onSuccess, onError, "+919944475589", true);                
-			}
-            
-        }
-    }
-		
-	setInterval(function(){ recognition.start();  }, 10000);
-	
-	function onSuccess(result){
-	  console.log("Success:"+result);
-	}
-
-	function onError(result) {
-	  console.log("Error:"+result);
-	}
-	
-	
-}
-</script>
-
-    
+    <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+    <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+    <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+    <input type="text" id="numm" /> <br>
+    <div id="asd" ></div>
+    <button onclick="callnow();">Call</button> <br>
+    <button onclick="select_a_contact();"> Contact</button>
 </body>
-
-
 </html>
