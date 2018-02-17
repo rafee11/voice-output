@@ -264,13 +264,13 @@ function onDeviceReady() {
         if (event.results.length > 0) {            
             q.value = event.results[0][0].transcript;
             //q.form.submit();
-            document.getElementById("result").innerHTML = JSON.stringify(event);
+            //document.getElementById("result").innerHTML = JSON.stringify(event);
 			var res1 = event.results[0][0].transcript.match('help');
 			var res2 = event.results[0][0].transcript.match('danger');
 			var res3 = event.results[0][0].transcript.match('save me');
 			alert(res1);	
 			if(res1 || res2 || res3){
-                //callnow();  
+                callnow();  
 				alert("cal");				
                 window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
 			}
