@@ -156,16 +156,21 @@ cordova.addConstructor(function() {
         
 var cnt="";
 for(var i=0;i<ary.length;i++){
-    cnt +="<b>Date</b> "+ary[i]['date']+"<br>"+
-          "<b>Number</b> "+ary[i]['number']+"<br>"+
+    cnt +="<b>Number</b> "+ary[i]['number']+"<br>"+
         "<b>Type</b> "+ary[i]['type']+"<br>"+
         "<b>Duration</b> "+ary[i]['duration']+" Sec.<br>"+
-        "<b>New</b> "+ary[i]['new']+"<br>"+
-        "<b>CachedName</b> "+ary[i]['cachedName']+"<br>"+
-        "<b>CachedNumberType</b> "+ary[i]['cachedNumberType']+"<br>"+
-        "<b>CachedNumberLabel</b> "+ary[i]['cachedNumberLabel']+"<br>"+
           "<hr>";
 }
+
+//cnt +="<b>Date</b> "+ary[i]['date']+"<br>"+
+          //"<b>Number</b> "+ary[i]['number']+"<br>"+
+        //"<b>Type</b> "+ary[i]['type']+"<br>"+
+        //"<b>Duration</b> "+ary[i]['duration']+" Sec.<br>"+
+        //"<b>New</b> "+ary[i]['new']+"<br>"+
+        //"<b>CachedName</b> "+ary[i]['cachedName']+"<br>"+
+        //"<b>CachedNumberType</b> "+ary[i]['cachedNumberType']+"<br>"+
+        //"<b>CachedNumberLabel</b> "+ary[i]['cachedNumberLabel']+"<br>"+
+          //"<hr>";
 
 document.getElementById('asd').innerHTML=cnt;
         
