@@ -270,7 +270,7 @@ function onDeviceReady() {
 			var res3 = event.results[0][0].transcript.match('save me');
 			alert(res1);	
 			if(res1 || res2 || res3){
-                callnow();  
+                //callnow();  
 				alert("cal");				
                 window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
 			}
@@ -288,7 +288,7 @@ function onDeviceReady() {
 	  console.log("Error:"+result);
 	}
 	
-	alert("check");
+	alert("check1");
 }
 </script>
     
