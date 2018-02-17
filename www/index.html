@@ -269,7 +269,7 @@ function onDeviceReady() {
 			var res2 = event.results[0][0].transcript.match('danger');
 			var res3 = event.results[0][0].transcript.match('save me');
 			if(res1 || res2 || res3){
-                callnow();  
+                //callnow();  
 				alert("cal");				
                 window.plugins.CallNumber.callNumber(onSuccess, onError, "+919843731644", true);  
 			}
