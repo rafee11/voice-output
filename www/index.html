@@ -30,7 +30,12 @@
 
 
 <body>
-   
+   <form>
+		<input type="search" id="q" name="q" size=60>
+		<input type="button" value="Click to Speak" onclick="recognition.start()">
+		<div id="result">
+		</div>
+	</form>
 
     
     <script src="cordova.js"></script>
@@ -47,8 +52,6 @@ var recognition;
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-cordova.plugins.backgroundMode.enable();
-alert(cordova.plugins.backgroundMode.isActive());
     recognition = new SpeechRecognition();
     recognition.onresult = function(event) {
         if (event.results.length > 0) {
@@ -59,14 +62,10 @@ alert(cordova.plugins.backgroundMode.isActive());
             
         }
     }
+	recognition.start();
 }
 </script>
-<form>
-    <input type="search" id="q" name="q" size=60>
-    <input type="button" value="Click to Speak" onclick="recognition.start()">
-    <div id="result">
-    </div>
-</form>
+
     
 </body>
 
