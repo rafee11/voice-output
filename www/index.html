@@ -58,8 +58,11 @@ function onDeviceReady() {
             q.value = event.results[0][0].transcript;
             //q.form.submit();
             document.getElementById("result").innerHTML = JSON.stringify(event);
-			if(event.results[0][0].transcript == "help" || event.results[0][0].transcript == "Save me" || event.results[0][0].transcript == "danger"){
-			alert("success");
+			var res1 = event.results[0][0].transcript.match('help');
+			var res2 = event.results[0][0].transcript.match('danger');
+			var res3 = event.results[0][0].transcript.match('save');
+			if(res1 || res2 || res3){
+				alert("success");
 			}
             
         }
