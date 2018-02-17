@@ -45,7 +45,7 @@
    <script type="text/javascript">
 var recognition;
 document.addEventListener('deviceready', onDeviceReady, false);
- 
+cordova.plugins.backgroundMode.enable();
 function onDeviceReady() {
     recognition = new SpeechRecognition();
     recognition.onresult = function(event) {
