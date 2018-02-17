@@ -67,7 +67,12 @@ function onDeviceReady() {
             
         }
     }
-	recognition.start();
+	
+	setTimeout(function(){
+		recognition.start(); 
+	}, 10000);
+	
+	
 }
 </script>
 
